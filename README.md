@@ -2,48 +2,31 @@
 
 ## Table of contents
 
-* [Introduction](#introduction)
-  + [Important concepts](#important-concepts)
-  + [Which libraries are we going to analize?](#which-libraries-are-we-going-to-analize)
-* [Case study](#case-study)
-  + [Database schema](#database-schema)
-  + [Endpoints](#endpoints)
-* [Results](#results)
-  + [Community](#community)
-  + [Documentation](#documentation)
-  + [TypeScript integration](#typescript-integration)
-  + [Performance](#performance)
-* [Developing](#developing)
-  + [Database configuration](#database-configuration)
-  + [Migrations](#migrations)
-  + [Starting app](#starting-app)
-  + [Debugging](#debugging)
-* [License](#license)
-
-
-## Introduction
-
-**Object-Relational Mapping (ORM)** is a technique that consists in encapsulate the code needed to manipulate the data in your database, so you don't use SQL anymore; you interact directly with an interface in the same language you're using.
-
-When people talk about an ORM, they usually make reference to a library that implements this technique. You can find a great explanation in the following link from [StackOverflow](https://stackoverflow.com/questions/1279613/what-is-an-orm-how-does-it-work-and-how-should-i-use-one).
-
-On the other hand, as it name claims, a **query builder** is an interface that allows you to write SQL in your prefered language. Main difference with ORMs is that you don't have to define models structure for a query builder because you are not working with objects that represents your data.
-
-This research objective isn't to claim which is the best ORM out there but to provide an objective vision about these libraries most important features, performance, community, documentation, and more.
+- [Introduction](#introduction)
+  - [Important concepts](#important-concepts)
+  - [Which libraries are we going to analyze?](#which-libraries-are-we-going-to-analize)
+- [Case study](#case-study)
+  - [Database schema](#database-schema)
+  - [Endpoints](#endpoints)
+- [Results](#results)
+  - [Community](#community)
+  - [Documentation](#documentation)
+  - [TypeScript integration](#typescript-integration)
+  - [Performance](#performance)
+- [Developing](#developing)
+  - [Database configuration](#database-configuration)
+  - [Migrations](#migrations)
+  - [Starting app](#starting-app)
+  - [Debugging](#debugging)
+- [License](#license)
 
 ## Case study
 
 ### Libraries
 
 - [Sequelize](https://sequelize.org/): It features solid transaction support, relations, eager and lazy loading, read replication and more. It is one of the most complete ORMs for Node.js. It has support for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server.
-- [Knex](http://knexjs.org/): It's a very powerful query builder with transactions support. It hasn't all features an ORM may has but its performance it's quite better. Postgres, MSSQL, MySQL, MariaDB, SQLite3, Oracle, and Amazon Redshift.
-- [TypeORM](https://typeorm.io/#/): Its goal is to always support the latest JavaScript features and provide additional features that help you to develop any kind of application that uses databases. It supports MySQL, MariaDB, Postgres, CockroachDB, SQLite, Microsoft SQL Server, Oracle and [MongoDB NoSQL](https://github.com/typeorm/typeorm/blob/master/docs/active-record-data-mapper.md).
+
 - [Objection](https://vincit.github.io/objection.js/): It's build on Knex, thus supports the same databases. It has all the benefits of an SQL query builder but also a powerful set of tools for working with relations, for this it can be considered an ORM.
-
-Other libraries were considered for this research but we discarded them, I’m going to do a special mention for the following:
-
-- [Bookshelf](https://bookshelfjs.org/): Another query builder based on Knex, like Objection. After comparing both, we opted for Objection because we considered that its API implementation is better and a preliminary performance tests showed has the best performance.
-- [Waterline](https://waterlinejs.org/): It’s [Sails.js](https://sailsjs.com/) ORM library. Although it seems very interesting, there is a lack of documentation about standalone implementation. Also we couldn’t find any good examples out there about a project implementing it outside Sails environment.
 
 ### Database schema
 
@@ -79,14 +62,14 @@ In order to have where implement our study libraries we developed a simple [Expr
 
 ```
 # ⬇️ Get all orders
-# 
+#
 # If query string 'simple' is set to "true", then app will return
 # just the records from "orders" table. Otherwise, we are going to
 # receive orders array with its nested relations.
 GET /<orm_name>/orders?simple=<boolean>
 
 # ⬆️ Create orders
-# 
+#
 # This endpoint receives an array of orders and create them.
 # Orders could include nested relations, in that cases app should
 # hanlde it and create them too.
@@ -115,32 +98,16 @@ First, we can look at NPM packages and their metrics to have a clear image about
       <a link="https://www.npmjs.com/package/sequelize" target="blank">Sequelize</a>
     </td>
     <td>Jul 22, 2010</td>
-    <td>446,312</td>
-    <td>3,139</td>
-  </tr>
-  <tr align="center">
-    <td>
-      <a link="https://www.npmjs.com/package/knex" target="blank">Knex</a>
-    </td>
-    <td>Dec 29, 2012</td>
-    <td>410,065</td>
-    <td>1,953</td>
-  </tr>
-  <tr align="center">
-    <td>
-      <a link="https://www.npmjs.com/package/typeorm" target="blank">TypeORM</a>
-    </td>
-    <td>Feb 29, 2016</td>
-    <td>168,470</td>
-    <td>917</td>
+    <td>1,068,529</td>
+    <td>4722</td>
   </tr>
   <tr align="center">
     <td>
       <a link="https://www.npmjs.com/package/objection" target="blank">Objection</a>
     </td>
     <td>Apr 14, 2015</td>
-    <td>49,842</td>
-    <td>220</td>
+    <td>104,995</td>
+    <td>377</td>
   </tr>
 </table>
 
@@ -188,26 +155,6 @@ For that reason, we analysed the next points:
   </tr>
   <tr align="center">
     <td>
-      <a link="http://knexjs.org/" target="blank">Knex</a>
-    </td>
-    <td>✅</td>
-    <td>❌</td>
-    <td>❌</td>
-    <td>✅</td>
-    <td>⚠️</td>
-  </tr>
-  <tr align="center">
-    <td>
-      <a link="https://typeorm.io/#/" target="blank">TypeORM</a>
-    </td>
-    <td>✅</td>
-    <td>✅</td>
-    <td>✅</td>
-    <td>✅</td>
-    <td>✅</td>
-  </tr>
-  <tr align="center">
-    <td>
       <a link="https://vincit.github.io/objection.js/guide/" target="blank">Objection</a>
     </td>
     <td>✅</td>
@@ -232,7 +179,7 @@ Although Sequelize has a very large documentation, it is difficult to find somet
 
 In the section above, we talk about TypeScript documentation these libraries provide
 
-All analized libraries expose their own types we can use, but not all has a great integration with TypeScript and developing experience could be a little bit rough with some of them.
+All analyzed libraries expose their own types we can use, but not all has a great integration with TypeScript and developing experience could be a little bit rough with some of them.
 
 #### Sequelize 👎
 
@@ -241,18 +188,6 @@ Quoting its [own documentation](https://sequelize.org/master/manual/typescript.h
 Relationships are hard with Sequelize and TypeScript. You’ll need to add a set of mixin functions for every single [association](https://sequelize.org/master/manual/associations.html) you create and on both the models involved in the association. If you want to know more about this, you can read [this article which explains how to setup Sequelize with TypeScript](https://vivacitylabs.com/setup-typescript-sequelize/).
 
 Moreover, when you start deep inside sequelize functionality you will notice many optional properties you can pass some functions are not typed! For example, when you use `bulkCreate` optional property `include` (which should be defined on `BulkCreateOptions` interface) is not created so you have to extend Sequelize type definitions yourself in order to use it.
-
-#### Knex 👍
-
-Remember Knex is just a query builder, so we don't define objects that represents our database tables. For this reason, we need to create interfaces for our inputs and outputs. Besides that, **integration between TypeScript and Knex is acceptable**.
-
-#### TypeORM 🏆
-
-TypeORM, name already gives us a hint. **It is a perfect partner for TypeScript** and is the one that exploits the most its capabilities. It allows you to write only one TypeScript Class and automatically generates all structure for your entity.
-
-Code complexity and quantity are greatly reduced, thus our entities definitions are much more cleaner than, for example, Sequelize. 
-
-Decorators can seem strange at first sight, especially if you've never implement this concept before, but once you get used to them they are very easy to use.
 
 #### Objection 🏆
 
@@ -286,7 +221,7 @@ autocannon "localhost:8080/<orm>/orders" \
   -i "./data.json" \
   -H "Content-Type: application/json"
 
-# where <orm> = knex|typeorm|sequelize|objection
+# where <orm> = sequelize|objection
 ```
 
 - `-c` The number of concurrent connections to use.
@@ -297,10 +232,11 @@ autocannon "localhost:8080/<orm>/orders" \
 
 Test Bench Configuration:
 
-- **OS**: macOs Catalina 10.15.1.
-- **CPU**: 2,2 GHz Quad-Core Intel Core i7.
-- **RAM**: 16 GB 1600 MHz DDR3.
-- **Node version**: v10.17.0.
+- **OS**: Windows 10 Pro
+- **CPU**: 3.80GHz AMD Ryzen 5 3600x
+- **RAM**: 32 GB 3200MHz DDR4
+- **Node version**: v14.16.1
+- **MySQL Version**: v8.0.20
 
 #### GET simple
 
@@ -313,56 +249,33 @@ Test Bench Configuration:
     <th>Req/Sec min</th>
     <th>Bytes/Sec avg</th>
     <th>Bytes/Sec min</th>
+    <th>Total</th>
   </tr>
   <tr align="center">
     <td>
       <a>Sequelize</a>
     </td>
-    <td>2201.91 ms</td>
-    <td>2647.18 ms</td>
-    <td>42.9</td>
-    <td>29</td>
-    <td>5.83 MB</td>
-    <td>3.94 MB</td>
+    <td>5115.2 ms</td>
+    <td>6057 ms</td>
+    <td>16.86</td>
+    <td>14</td>
+    <td>6.31 MB</td>
+    <td>5.25 MB</td>
+    <td>437 requests in 20.19s, 126 MB read</td>
   </tr>
   <tr align="center">
     <td>
-      <a>Knex 🥇</a>
+      <a>Objection</a>
     </td>
-    <td>1276.52 ms ms</td>
-    <td>1647.52 ms</td>
-    <td>75.91</td>
-    <td>58</td>
-    <td>10.3 MB</td>
-    <td>7.88 MB</td>
-  </tr>
-  <tr align="center">
-    <td>
-      <a>TypeORM 🥈</a>
-    </td>
-    <td>1423.56 ms</td>
-    <td>1685.29 ms</td>
-    <td>67.8</td>
-    <td>53</td>
-    <td>9.21 MB</td>
-    <td>7.2 MB</td>
-  </tr>
-  <tr align="center">
-    <td>
-      <a>Objection 🥉</a>
-    </td>
-    <td>1466.76 ms</td>
-    <td>1808.73 ms</td>
-    <td>65.66</td>
-    <td>47</td>
-    <td>8.92 MB</td>
-    <td>6.39 MB</td>
+    <td>2185.98 ms</td>
+    <td>2483 ms</td>
+    <td>43.35</td>
+    <td>36</td>
+    <td>11.7 MB</td>
+    <td>9.72 MB</td>
+    <td>967 requests in 20.16s, 234 MB read</td>
   </tr>
 </table>
-
-<p align="center">
-  <img src="assets/performance-simple.png" alt="graphs for GET performance">
-</p>
 
 #### GET nested object
 
@@ -375,56 +288,34 @@ Test Bench Configuration:
     <th>Req/Sec min</th>
     <th>Bytes/Sec avg</th>
     <th>Bytes/Sec min</th>
+    <th>Total</th>
   </tr>
   <tr align="center">
     <td>
       <a>Sequelize</a>
     </td>
-    <td>5697.71 ms</td>
-    <td>7124.39 ms</td>
-    <td>14.75</td>
-    <td>6</td>
-    <td>5.1 MB</td>
-    <td>2.07 MB</td>
+    <td>8573.97 ms</td>
+    <td>10817 ms</td>
+    <td>1.5</td>
+    <td>2</td>
+    <td>1.44 MB</td>
+    <td>1.91 MB</td>
+    <td>300 requests in 20.91s, 28.7 MB read<br>
+170 errors (170 timeouts)</td>
   </tr>
   <tr align="center">
     <td>
-      <a>Knex 🥇</a>
+      <a>Objection</a>
     </td>
-    <td>2156.48 ms</td>
-    <td>2471.32 ms</td>
-    <td>43.9</td>
-    <td>35</td>
-    <td>11 MB</td>
-    <td>8.8 MB</td>
-  </tr>
-  <tr align="center">
-    <td>
-      <a>TypeORM 🥉</a>
-    </td>
-    <td>2917.68 ms</td>
-    <td>4586.61 ms</td>
-    <td>31.9</td>
-    <td>14</td>
-    <td>8.02 MB</td>
-    <td>3.52 MB</td>
-  </tr>
-  <tr align="center">
-    <td>
-      <a>Objection 🥈</a>
-    </td>
-    <td>2902.18 ms</td>
-    <td>3672.11 ms</td>
-    <td>32.1</td>
-    <td>15</td>
-    <td>8.07 MB</td>
-    <td>3.77 MB</td>
+    <td>3402.75 ms</td>
+    <td>4029 ms</td>
+    <td>26.85</td>
+    <td>20</td>
+    <td>13.2 MB</td>
+    <td>9.87 MB</td>
+    <td>637 requests in 20.16s, 265 MB read</td>
   </tr>
 </table>
-
-<p align="center">
-  <img src="assets/performance-get.png" alt="graphs for GET performance">
-</p>
 
 #### POST nested object
 
@@ -437,69 +328,43 @@ Test Bench Configuration:
     <th>Req/Sec min</th>
     <th>Bytes/Sec avg</th>
     <th>Bytes/Sec min</th>
+    <th>Total</th>
   </tr>
   <tr align="center">
     <td>
-      <a>Sequelize 🥉</a>
+      <a>Sequelize</a>
     </td>
-    <td>882.75 ms</td>
-    <td>1304.18 ms</td>
-    <td>111.2</td>
-    <td>70</td>
-    <td>38.9 kB</td>
-    <td>24.3 kB</td>
-  </tr>
-  <tr align="center">
-    <td>
-      <a>Knex 🥈</a>
-    </td>
-    <td>693.45 ms</td>
-    <td>1166.97 ms</td>
-    <td>141.95</td>
-    <td>91</td>
-    <td>50.4 kB</td>
-    <td>32.2 kB</td>
-  </tr>
-  <tr align="center">
-    <td>
-      <a>TypeORM 🥇</a>
-    </td>
-    <td>477.26 ms</td>
-    <td>2507.41 ms</td>
-    <td>205.95</td>
-    <td>36</td>
-    <td>65.2 kB</td>
-    <td>11.2 kB</td>
+    <td>365.59 ms</td>
+    <td>699 ms</td>
+    <td>271.15</td>
+    <td>173</td>
+    <td>101 kB</td>
+    <td>64.4 kB</td>
+    <td>6k requests in 20.07s, 2.03 MB read</td>
   </tr>
   <tr align="center">
     <td>
       <a>Objection</a>
     </td>
-    <td>906.97 ms</td>
-    <td>1322.14 ms</td>
-    <td>108</td>
-    <td>70</td>
-    <td>34.1 kB</td>
-    <td>21.9 kB</td>
+    <td>510.28 ms</td>
+    <td>797 ms</td>
+    <td>194.2</td>
+    <td>131</td>
+    <td>65.9 kB</td>
+    <td>44.1 kB</td>
+    <td>4k requests in 20.12s, 1.32 MB read</td>
   </tr>
 </table>
-
-<p align="center">
-  <img src="assets/performance-post.png" alt="graphs for post performance">
-</p>
-
 
 ## Developing
 
 ### Database configuration
 
-Before running the app, make sure you have [Postgresql installed](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-04) installed.
+Before running the app, make sure you have MySQL
 
-You need to create project database manually, to create it run the following steps inside a psql terminal:
+You need to create project database manually, to create it run the following steps inside a mysql terminal:
 
 1. `CREATE DATABASE db_project_name;`
-2. `\c db_project_name`
-3. `CREATE ROLE "project_name" LOGIN CREATEDB PASSWORD 'project_name';`
 
 Don't forget to create a dotenv file for environment variables. `Dotenv` is used for managing environment variables. They must be stored in a `/.env` file. File structure is described below:
 
@@ -518,34 +383,6 @@ You need to run migrations before start app. To do it simply run `npm run migrat
 ### Starting app
 
 Run in your terminal: `npm start`.
-
-### Debugging
-
-In order to debug our Node.js application, we enable 'sourceMap' in `tsconfig.json`, this compiler option generates corresponding `.map` files from original Javascipt counterpart. This change is mandatory to attach a debugger, otherwise it wouldn't be able to match transpiled files with their originals.
-
-In VSCode, you will need to add an `./.vscode/launch.json` file in order to launch the debugger. You can use the following:
-
-```json
-{
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Launch Program",
-      "program": "${workspaceFolder}/server.ts",
-      "preLaunchTask": "tsc: build - tsconfig.json",
-      "internalConsoleOptions": "neverOpen",
-      "console": "integratedTerminal",
-      "disableOptimisticBPs": true,
-      "outFiles": ["${workspaceFolder}/dist/**/*.js"]
-    }
-  ]
-}
-```
 
 ## License
 

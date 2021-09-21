@@ -15,6 +15,7 @@
     "knex": "node -r dotenv/config ./node_modules/knex/bin/cli.js",
     "migrate:make": "npm run knex -- migrate:make --knexfile ./dist/src/knex/config.js",
     "migrate": "npm run knex -- migrate:latest --knexfile ./dist/src/knex/config.js",
+    "down":"npm run knex -- migrate:down --knexfile ./dist/src/knex/config.js",
     "start": "ts-node-dev --respawn --transpileOnly ./server.ts"
   },
   "cacheDirectories": [
