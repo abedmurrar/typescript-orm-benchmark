@@ -6,7 +6,7 @@ const config = {
   database: process.env.DB_NAME as string,
   username: process.env.DB_USER as string,
   password: process.env.DB_PASSWORD as string,
-  dialect: 'postgres',
+  dialect: 'mysql',
   define: {
     freezeTableName: true,
     timestamps: false

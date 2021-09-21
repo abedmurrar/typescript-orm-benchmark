@@ -1,25 +1,27 @@
-import * as Knex from 'knex';
+import "dotenv/config";
+import * as Knex from "knex";
 
-exports.up = async (knex: Knex): Promise<void> => {
-  await knex.schema.createTable("orders", (table: Knex.TableBuilder) => {
-    table.increments("id").primary();
-    table.string("user");
-    table.timestamp("date").defaultTo(knex.fn.now());
-  });
-  await knex.schema.createTable("items", (table: Knex.TableBuilder) => {
-    table.increments("id").primary();
-    table.string("name");
-    table.float("value");
-  });
-  await knex.schema.createTable("orders_items", (table: Knex.TableBuilder) => {
-    table.increments("id").primary();
-    table.integer("order_id").references("orders.id");
-    table.integer("item_id").references("items.id");
-  });
-};
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+exports.up = (knex: Knex) =>
+  knex.schema
+    .createTableIfNotExists("orders", (table) => {
+      table.increments();
+      table.string("user");
+      table.timestamp("date").defaultTo(knex.fn.now());
+    })
+    .createTableIfNotExists("items", (table) => {
+      table.increments();
+      table.string("name");
+      table.float("value");
+    })
+    .createTableIfNotExists("orders_items", (table) => {
+      table.increments();
+      table.integer("order_id", 11).nullable().unsigned();
+      table.integer("item_id", 11).nullable().unsigned();
+      table.foreign("order_id").references("id").inTable("orders");
+      table.foreign("item_id").references("id").inTable("items");
+    });
 
-exports.down = async (knex: Knex): Promise<void> => {
-  await knex.schema.dropTable("orders_items");
-  await knex.schema.dropTable("orders");
-  await knex.schema.dropTable("items");
-};
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+exports.down = (knex: Knex) =>
+  knex.schema.dropTable("orders_items").dropTable("orders").dropTable("items");

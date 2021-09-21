@@ -3,7 +3,7 @@ import 'dotenv/config';
 import path from 'path';
 
 const configuration = {
-  client: 'pg',
+  client: 'mysql2',
   pool: { min: 0, max: 10 },
   debug: true,
   acquireConnectionTimeout: 50000,

@@ -1,4 +1,6 @@
-import * as Knex from 'knex';
+import "dotenv/config";
+
+import * as Knex from "knex";
 
 exports.up = async (knex: Knex): Promise<void> => {
   await knex.schema.createTable("orders", (table: Knex.TableBuilder) => {

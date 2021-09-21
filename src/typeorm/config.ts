@@ -3,7 +3,7 @@ import 'dotenv/config';
 import path from 'path';
 
 const configuration = {
-  type: 'postgres',
+  type: 'mysql',
   port: process.env.DB_PORT,
   host: process.env.DB_HOST,
   username: process.env.DB_USER,
