@@ -370,7 +370,7 @@ Don't forget to create a dotenv file for environment variables. `Dotenv` is used
 
 ```
 DB_HOST=localhost
-DB_PORT=5432
+DB_PORT=3306
 DB_USERNAME=project_name
 DB_PASSWORD=project_name
 DB_NAME=db_project_name
