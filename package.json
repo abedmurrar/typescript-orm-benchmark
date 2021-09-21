@@ -12,9 +12,9 @@
     "lint-diff": "git diff --name-only --cached --relative | grep \\\\.ts$ | xargs eslint",
     "postinstall": "npm run build",
     "precommit": "npm run lint-diff",
-    "knex": "node -r dotenv/config ./node_modules/.bin/knex",
-    "migrate:make": "npm run knex -- migrate:make --knexfile ./dist/knex/config.js",
-    "migrate": "npm run knex -- migrate:latest --knexfile ./dist/knex/config.js",
+    "knex": "node -r dotenv/config ./node_modules/knex/bin/cli.js",
+    "migrate:make": "npm run knex -- migrate:make --knexfile ./dist/src/knex/config.js",
+    "migrate": "npm run knex -- migrate:latest --knexfile ./dist/src/knex/config.js",
     "start": "ts-node-dev --respawn --transpileOnly ./server.ts"
   },
   "cacheDirectories": [
@@ -28,13 +28,13 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.17.1",
-    "knex": "^0.20.0",
-    "knex-stringcase": "^1.3.0",
-    "objection": "^1.6.11",
-    "pg": "^7.4.1",
+    "knex": "^0.21.17",
+    "knex-stringcase": "^1.4.5",
+    "mysql2": "^2.3.0",
+    "objection": "^2.2.15",
     "reflect-metadata": "^0.1.13",
-    "sequelize": "^5.21.2",
-    "typeorm": "^0.2.20"
+    "sequelize": "^6.6.5",
+    "typeorm": "^0.2.37"
   },
   "devDependencies": {
     "@types/babel-core": "^6.25.6",
@@ -62,6 +62,6 @@
     "sequelize-cli": "^5.5.1",
     "ts-node-dev": "1.0.0-pre.40",
     "tslint": "^5.20.1",
-    "typescript": "^3.7.2"
+    "typescript": "^4.4.3"
   }
 }
